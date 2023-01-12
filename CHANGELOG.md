@@ -10,3 +10,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 09/01/2023 editado
 ### Added
 10/01/2023 - añadida la rama feature al repo todo-list-aws
+12/01/2023 - Backup de la templat.yaml y modificacion del fichero 
