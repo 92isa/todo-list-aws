@@ -210,7 +210,7 @@ class TestDatabaseFunctions(unittest.TestCase):
         print ('---------------------')
         print ('Start: items')
         from src.todoList import get_items
-        table = get_table(None)
+        table = get_items(None)
         print ('Table name:' +table.name)
         print ('End: test_get_table')
 
