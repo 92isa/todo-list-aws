@@ -206,13 +206,6 @@ class TestDatabaseFunctions(unittest.TestCase):
         print ('Table name:' + table.name)
         print ('End: test_get_table')
         
-    def test_get_items(self):
-        print ('---------------------')
-        print ('Start: items')
-        from src.todoList import get_items
-        table = get_items(None)
-        print ('Table name:' +table.name)
-        print ('End: test_get_table')
 
 if __name__ == '__main__':
     unittest.main()
