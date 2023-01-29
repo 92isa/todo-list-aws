@@ -10,4 +10,3 @@ pip show coverage
 coverage run --include=src/todoList.py test/unit/TestToDo.py
 coverage report
 coverage xml
-export ENDPOINT_OVERRIDE="http://localhost:8000"
