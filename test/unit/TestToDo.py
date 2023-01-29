@@ -57,7 +57,6 @@ class TestDatabaseFunctions(unittest.TestCase):
         #self.assertIn('todoTable', self.table_local.name)
         print ('End: test_table_exists')
         
-
     def test_put_todo(self):
         print ('---------------------')
         print ('Start: test_put_todo')
@@ -205,7 +204,15 @@ class TestDatabaseFunctions(unittest.TestCase):
         from src.todoList import get_table
         table = get_table(None)
         print ('Table name:' + table.name)
-        print ('End: test_get_table')    
+        print ('End: test_get_table')
+        
+    def test_get_items(self):
+        print ('---------------------')
+        print ('Start: items')
+        from src.todoList import get_items
+        table = get_table(None)
+        print ('Table name:' +table.name)
+        print ('End: test_get_table')
 
 if __name__ == '__main__':
     unittest.main()
