@@ -205,6 +205,7 @@ class TestDatabaseFunctions(unittest.TestCase):
         table = get_table(None)
         print ('Table name:' +table.name)
         print ('End: test_get_table')
+        
 
 if __name__ == '__main__':
     unittest.main()
