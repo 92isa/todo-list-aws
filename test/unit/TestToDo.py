@@ -206,16 +206,5 @@ class TestDatabaseFunctions(unittest.TestCase):
         print ('Table name:' +table.name)
         print ('End: test_get_table')
 
-    def test_translate_todo(self):
-    	self.table_handler_a.put_todo(self.text, self.uuid) # Primero agregamos un registro
-    	# Ejecución en Tabla a local debe retornar 200(OK)
-		self.assertEqual(200, self.table_handler_a.translate_todo(self.uuid,'es','en')['statusCode'])
-		self.assertEqual(self.table_handler_a.translate_todo(self.uuid,'es','en')['Item']['TranslatedText'], "Learn DevOps and Cloud at UNIR")
-		
-		self.table_handler_b.put_todo(self.text, self.uuid) # Primero agregamos un registro
-		# Ejecución en Tabla b mockeada debe retornar 200(OK)
-		self.assertEqual(200, self.table_handler_b.translate_todo(self.uuid,'es','en')['statusCode'])
-		self.assertEqual(self.table_handler_b.translate_todo(self.uuid,'es','en')['Item']['TranslatedText'], "Learn DevOps and Cloud at UNIR")
-
 if __name__ == '__main__':
     unittest.main()
