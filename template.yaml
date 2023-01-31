@@ -107,44 +107,19 @@ Resources:
         ReadCapacityUnits: 1
         WriteCapacityUnits: 1
         
-  TranslateFunction:
-    Type: AWS::Serverless::Function
+  TranslateTodoFunction:
+    Type: AWS::Serverless::Function 
     Properties:
       CodeUri: src/
+      Role: !Sub "arn:aws:iam::${AWS::AccountId}:role/LabRole"
       Handler: translate.translate
+      Runtime: python3.7
       Events:
-        Translate:
+        Create:
           Type: Api
           Properties:
-            Path: /todos/{id}/{lang}
+            Path: /todos/{id}/{language}
             Method: get
-      Policies:
-        Statement:
-        - Sid: AccesoDynamoDB
-          Effect: Allow
-          Action:
-           - 'dynamodb:Query'
-           - 'dynamodb:Scan'
-           - 'dynamodb:GetItem'
-           - 'dynamodb:PutItem'
-           - 'dynamodb:UpdateItem'
-           - 'dynamodb:DeleteItem'
-          Resource:
-            !Sub "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/todosTable-${Stage}"
-        - Sid: AccesoAmazonTranslate
-          Effect: Allow
-          Action:
-           - 'translate:TranslateText'
-           - 'translate:GetTerminology'
-           - 'translate:ListTerminologies'
-           - 'translate:ListTextTranslationJobs'
-           - 'translate:DescribeTextTranslationJob'
-           - 'translate:GetParallelData'
-           - 'translate:ListParallelData'
-           - 'comprehend:DetectDominantLanguage'
-           - 'cloudwatch:GetMetricStatistics'
-           - 'cloudwatch:ListMetrics'
-          Resource: "*"
 
 Outputs:
   # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
@@ -168,12 +143,6 @@ Outputs:
   DeleteTodoApi:
     Description: "API Gateway endpoint URL for ${opt:stage} stage for Delete TODO"
     Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/todos/{id}"
-  TranslateApi:
-    Description: "API Gateway endpoint URL for ${Stage} stage for Translate function"
-    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/todos/{id}{lang}"
-  TranslateFunction:
-    Description: "Translate Lambda Function ARN"
-    Value: !GetAtt TranslateFunction.Arn
-  TranslateFunctionIamRole:
-    Description: "Implicit IAM Role created for Translate function"
-    Value: !GetAtt TranslateFunctionRole.Arn
+  TranslateTodoApi:
+    Description: "API Gateway endpoint URL for ${opt:stage} stage for Translate TODO"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/todos/{id}/{language}"

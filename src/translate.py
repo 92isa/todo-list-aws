@@ -1,30 +1,23 @@
-import os
 import json
-import boto3
-
-from utils import decimalencoder
-from utils.todoTableClass import todoTableClass
-
-
-if os.environ["ENVIRONMENT"] == "LOCAL":
-    dynamodb = None
-else:
-    dynamodb = boto3.resource("dynamodb")
+import todoList
 
 
 def translate(event, context):
-    mytable = todoTableClass(dynamodb)
-
-    source_language = 'auto'  # AmazonComprehend autodetecta el lenguaje origen
-    target_language = event['pathParameters']['lang']
-    result = mytable.translate_todo(event['pathParameters']['id'],
-                                    source_language,
-                                    target_language)
-
-    response = {
+    try:
+        item = todoList.get_item(event['pathParameters']['id'])
+        translation = todoList.translate_item(
+            item['text'], event['pathParameters']['language'])
+        return {
                 "statusCode": 200,
-                "body": json.dumps(result.get('TranslatedText'),
-                                   cls=decimalencoder.DecimalEncoder)
-            }
-
-    return response
+                "body": json.dumps(translation)
+        }
+    except KeyError as e:
+        return {
+            "statusCode": 404,
+            "body": str(e)
+        }
+    except Exception as e:
+        return {
+            "statusCode": 500,
+            "body": str(e)
+        }
