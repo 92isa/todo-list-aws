@@ -17,7 +17,6 @@ def translate(event, context):
 
     source_language = 'auto'  # AmazonComprehend autodetecta el lenguaje origen
     target_language = event['pathParameters']['lang']
-
     result = mytable.translate_todo(event['pathParameters']['id'],
                                     source_language,
                                     target_language)
