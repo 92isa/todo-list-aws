@@ -160,4 +160,5 @@ def get_translate(text, language, dynamodb=None):  # pragma: no cover
     else:
         translation = result.get('TranslatedText')
         print('Result translate:'+str(translation))
-        return translation
+        
+    return translation
