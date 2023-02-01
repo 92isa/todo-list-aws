@@ -147,6 +147,7 @@ def create_todo_table(dynamodb):
 
     return table
 
+
 def get_translate(text, language, dynamodb=None):  # pragma: no cover
     translate = boto3.client(
         service_name='translate', region_name='us-east-1', use_ssl=True
@@ -160,5 +161,4 @@ def get_translate(text, language, dynamodb=None):  # pragma: no cover
     else:
         translation = result.get('TranslatedText')
         print('Result translate:'+str(translation))
-        
     return translation
