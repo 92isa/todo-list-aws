@@ -145,4 +145,4 @@ def create_todo_table(dynamodb):
     if (table.table_status != 'ACTIVE'):
         raise AssertionError()
 
-    return table 
+    return table
